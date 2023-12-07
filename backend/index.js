@@ -3,11 +3,17 @@ const connection = require("./connection");
 const app = express();
 const cors = require("cors");
 
+const blogRoutes = require("./routes/blog.routes");
+
+const authRoutes = require("./routes/auth.routes");
+
 require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
 
+app.use("/api", authRoutes);
+app.use("/api", blogRoutes);
 
 app.listen(process.env.PORT, async () => {
   try {
